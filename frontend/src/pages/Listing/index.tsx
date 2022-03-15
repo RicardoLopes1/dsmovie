@@ -1,6 +1,7 @@
 import axios from "axios";
 import MovieCard from "components/MovieCard";
 import Pagination from "components/Pagination";
+import Spinner from "components/Spinner/spinner";
 import { useEffect, useState } from "react";
 import { MoviePage } from "types/movie";
 import { BASE_URL } from "utils/requests";
@@ -8,6 +9,7 @@ import { BASE_URL } from "utils/requests";
 function Listing() {
 
   const [pageNumber, setPageNumber] = useState(0);
+  const [spinner, setSpinner] = useState(true);
   const [page, setPage] = useState<MoviePage>({
     content: [],
     last: true,
@@ -26,6 +28,7 @@ function Listing() {
         const data = res.data as MoviePage;
         setPage(data);
       });
+      setSpinner(false);
   }, [pageNumber]);
 
   const handlePageChange = (newPageNumber: number) => {
@@ -38,13 +41,16 @@ function Listing() {
 
       <div className="container">
         <div className="row">
-          {page.content.map(movie => {
-            return (
-              <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                <MovieCard movie={movie} />
-              </div>
-            )
-          })}
+          {spinner ? <Spinner /> : 
+            page.content.map((movie: any) => {
+              return (
+                <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                  <MovieCard movie={movie} />
+                </div>
+              )
+            })
+          }
+          
 
 
         </div>
