@@ -1,6 +1,4 @@
 .center {
-  width: 100vw;
-  height: 80vh;
   display: flex;
   flex-direction: row;
   justify-content: center;

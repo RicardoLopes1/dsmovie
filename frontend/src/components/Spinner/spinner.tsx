@@ -5,8 +5,8 @@ function Spinner() {
   return (
     <div className="center">
       <Oval 
-        height="80%"
-        width="80%"
+        height="50%"
+        width="50%"
         color="blue"
         ariaLabel='loading'
       />
